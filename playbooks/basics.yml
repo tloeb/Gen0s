@@ -15,5 +15,17 @@
         user: root
         key: "{{ lookup('file', '{{ playbook_dir }}/../keys/id_rsa.pub') }}"
 
+    - name: Enable FirewallD
+      service: name=firewalld state=started enabled=yes
+
+    - name: Enable Standard Ports
+      firewalld: 
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+      with_items:
+        - 22/tcp
+        - 80/tcp
+        - 443/tcp
   roles:
     - geerlingguy.repo-epel

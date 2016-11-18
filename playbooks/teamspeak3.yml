@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  vars_files:
+    - "{{ playbook_dir }}/../vars/auth.yml"
+  roles: 
+    - "{{ playbook_dir }}/../roles/teamspeak3"
