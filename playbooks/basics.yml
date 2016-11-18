@@ -2,6 +2,7 @@
 - hosts: localhost
   vars_files:
     - "{{ playbook_dir }}/../vars/packages.yml"
+    - "{{ playbook_dir }}/../vars/auth.yml"
   tasks:
 
     - name: Install Packages
@@ -9,7 +10,14 @@
         name: "{{ item }}"
         state: present
       with_items: "{{ basic_pkg }}"
-    
+
+    - name: Add system user
+      user:
+        name: "{{ system_user.name }}"
+        password: "{{ system_user.password}}"
+        update_password: always
+        group: root 
+
     - name: SSH Key
       authorized_key: 
         user: root
@@ -18,6 +26,35 @@
     - name: Enable FirewallD
       service: name=firewalld state=started enabled=yes
 
+    - name: Get Vim Configuration for root
+      git:
+        repo: https://github.com/amix/vimrc
+        dest: ~/.vim_runtime
+
+    - name: Install Git configuration for root
+      become: yes
+      command: sh ~/.vim_runtime/install_awesome_vimrc.sh       
+
+    - name: Get Vim Configuration for system_user
+      become_user: "{{ system_user.name }}" 
+      git:
+        repo: https://github.com/amix/vimrc
+        dest: "/home/{{ system_user.name }}/.vim_runtime"
+
+    - name: Install Git configuration for system_user
+      become_user: "{{ system_user.name }}" 
+      command: "sh /home/{{ system_user.name }}/.vim_runtime/install_awesome_vimrc.sh"       
+
+    - name: add .bashrc for root
+      copy:
+        src: "{{playbook_dir}}/../files/bashrc"
+        dest: ~/.bashrc
+
+    - name: add .bashrc for system user
+      copy:
+        src: "{{playbook_dir}}/../files/bashrc"
+        dest: "/home/{{ system_user.name }}/.bashrc"
+    
     - name: Enable Standard Ports
       firewalld: 
         port: "{{ item }}"

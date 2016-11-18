@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become: yes
+  roles:
+      - jladdjr.inspircd
+  tasks:
+    - name: Enable IRC Ports
+      firewalld: 
+        port: 6667/tcp
+        permanent: true
+        state: enabled
+    - name: Restart firewalld
+      service:
+        name: firewalld
+        state: restarted

@@ -1,3 +1,4 @@
 ---
 - include: playbooks/basics.yml
 - include: playbooks/teamspeak3.yml
+- include: playbooks/inspircd.yml
