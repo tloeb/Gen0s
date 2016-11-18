@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  vars_files:
+    - "{{ playbook_dir }}/../vars/packages.yml"
+  tasks:
+
+    - name: Install Packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ basic_pkg }}"
+    
+    - name: SSH Key
+      authorized_key: 
+        user: root
+        key: "{{ lookup('file', '{{ playbook_dir }}/../keys/id_rsa.pub') }}"
+
+  roles:
+    - geerlingguy.repo-epel
