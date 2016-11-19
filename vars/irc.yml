@@ -6,4 +6,4 @@
 - shout_port: 80
 - shout_defaults_nick: anonymous
 - shout_defaults_join: "#init"
-
+- shout_defaults_tls: false
