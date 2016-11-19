@@ -1,0 +1,261 @@
+module.exports = {
+	//
+	// Set the server mode.
+	// Public servers does not require authentication.
+	//
+	// Set to 'false' to enable users.
+	//
+	// @type     boolean
+	// @default  false
+	//
+	public: {{ shout_public }},
+
+	//
+	// Allow connections from this host.
+	//
+	// @type     string
+	// @default  "0.0.0.0"
+	//
+	host: "{{ shout_host }}",
+
+	//
+	// Set the port to listen on.
+	//
+	// @type     int
+	// @default  9000
+	//
+	port: {{ shout_port }},
+
+	//
+	// Set the local IP to bind to.
+	//
+	// @type     string
+	// @default  "0.0.0.0"
+	//
+	bind: "{{ shout_bind }}",
+
+	//
+	// Set the default theme.
+	//
+	// @type     string
+	// @default  "themes/example.css"
+	//
+	theme: "{{ shout_theme }}",
+
+	//
+	// Autoload users
+	//
+	// When this setting is enabled, your 'users/' folder will be monitored. This is useful
+	// if you want to add/remove users while the server is running.
+	//
+	// @type     boolean
+	// @default  true
+	//
+	autoload: {{ shout_autoload }},
+
+	//
+	// Prefetch URLs
+	//
+	// If enabled, Shout will try to load thumbnails and site descriptions from
+	// URLs posted in channels.
+	//
+	// @type     boolean
+	// @default  true
+	//
+	prefetch: {{ shout_prefetch }},
+
+	//
+	// Prefetch URLs Image Preview size limit
+	//
+	// If prefetch is enabled, Shout will only display content under the maximum size.
+	// Default value is 512 (in kB)
+	//
+	// @type     int
+	// @default  512
+	//
+	prefetchMaxImageSize: {{ shout_prefetch_max_image_size }},
+
+	//
+	// Display network
+	//
+	// If set to false Shout will not expose network settings in login
+	// form, limiting client to connect to the configured network.
+	//
+	// @type     boolean
+	// @default  true
+	//
+	displayNetwork: {{ shout_display_network }},
+
+	//
+	// Log settings
+	//
+	// Logging has to be enabled per user. If enabled, logs will be stored in
+	// the '/users/<user>/logs/' folder.
+	//
+	// @type     object
+	// @default  {}
+	//
+	logs: {
+		//
+		// Timestamp format
+		//
+		// @type     string
+		// @default  "YYYY-MM-DD HH:mm:ss"
+		//
+		format: "{{ shout_logs_format }}",
+
+		//
+		// Timezone
+		//
+		// @type     string
+		// @default  "UTC+00:00"
+		//
+		timezone: "{{ shout_logs_timezone }}"
+	},
+
+	//
+	// Default values for the 'Connect' form.
+	//
+	// @type     object
+	// @default  {}
+	//
+	defaults: {
+		//
+		// Name
+		//
+		// @type     string
+		// @default  "Freenode"
+		//
+		name: "{{ shout_defaults_name }}",
+
+		//
+		// Host
+		//
+		// @type     string
+		// @default  "irc.freenode.org"
+		//
+		host: "{{ shout_defaults_host }}",
+
+		//
+		// Port
+		//
+		// @type     int
+		// @default  6697
+		//
+		port: {{ shout_defaults_port }},
+
+		//
+		// Password
+		//
+		// @type     string
+		// @default  ""
+		//
+		password: "{{ shout_defaults_password }}",
+
+		//
+		// Enable TLS/SSL
+		//
+		// @type     boolean
+		// @default  true
+		//
+		tls: {{ shout_defaults_tls }},
+
+		//
+		// Nick
+		//
+		// @type     string
+		// @default  "shout-user"
+		//
+		nick: "{{ shout_defaults_nick }}",
+
+		//
+		// Username
+		//
+		// @type     string
+		// @default  "shout-user"
+		//
+		username: "{{ shout_defaults_username }}",
+
+		//
+		// Real Name
+		//
+		// @type     string
+		// @default  "Shout User"
+		//
+		realname: "{{ shout_defaults_realname }}",
+
+		//
+		// Channels
+		//
+		// @type     string
+		// @default  "#foo, #shout-irc"
+		//
+		join: "{{ shout_defaults_join }}"
+	},
+
+	//
+	// Set socket.io transports
+	//
+	// @type     array
+	// @default  ["polling', "websocket"]
+	//
+	transports: {{ shout_transports }},
+
+	//
+	// Run Shout with HTTPS support.
+	//
+	// @type     object
+	// @default  {}
+	//
+	https: {
+		//
+		// Enable HTTPS support.
+		//
+		// @type     boolean
+		// @default  false
+		//
+		enable: {{ shout_https_enable }},
+
+		//
+		// Path to the key.
+		//
+		// @type     string
+		// @example  "sslcert/key.pem"
+		// @default  ""
+		//
+		key: "{{ shout_https_key }}",
+
+		//
+		// Path to the certificate.
+		//
+		// @type     string
+		// @example  "sslcert/key-cert.pem"
+		// @default  ""
+		//
+		certificate: "{{ shout_https_certificate }}"
+	},
+
+	//
+	// Run Shout with identd support.
+	//
+	// @type     object
+	// @default  {}
+	//
+	identd: {
+		//
+		// Run the identd daemon on server start.
+		//
+		// @type     boolean
+		// @default  false
+		//
+		enable: {{ shout_identd_enable }},
+
+		//
+		// Port to listen for ident requests.
+		//
+		// @type     int
+		// @default  113
+		//
+		port: {{ shout_identd_port }}
+	}
+};

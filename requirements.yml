@@ -1,3 +1,4 @@
 ---
 - src: geerlingguy.repo-epel
 - src: jladdjr.inspircd
+- src: https://github.com/beetboxvm/ansible-role-beetbox-shout

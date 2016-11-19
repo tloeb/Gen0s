@@ -1,0 +1,28 @@
+---
+shout_home: "{{ lookup('env','HOME') }}/shout"
+shout_public: "true"
+shout_host: 0.0.0.0
+shout_port: 9000
+shout_bind: 0.0.0.0
+shout_theme: themes/example.css
+shout_autoload: "true"
+shout_prefetch: "false"
+shout_prefetch_max_image_size: 512
+shout_display_network: "true"
+shout_logs_format: YYYY-MM-DD HH:mm:ss
+shout_logs_timezone: UTC+00:00
+shout_defaults_name: Freenode
+shout_defaults_host: irc.freenode.org
+shout_defaults_port: 6697
+shout_defaults_password: ""
+shout_defaults_tls: "true"
+shout_defaults_nick: shout-user
+shout_defaults_username: shout-user
+shout_defaults_realname: Shout User
+shout_defaults_join: "#foo, #shout-irc"
+shout_transports: '["polling", "websocket"]'
+shout_https_enable: "false"
+shout_https_key: ""
+shout_https_certificate: ""
+shout_identd_enable: "false"
+shout_identd_port: 113

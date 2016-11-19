@@ -1,0 +1,38 @@
+---
+
+- name: Install Forever
+  npm:
+    name: forever
+    global: yes
+
+- name: Install Shout
+  npm:
+    name: shout
+    global: yes
+
+- name: Create shout directory.
+  file:
+    path: "{{ shout_home }}"
+    state: directory
+
+- name: Copy Shout config into place.
+  template:
+    src: config.js.j2
+    dest: /usr/lib/node_modules/shout/defaults/config.js
+
+- name: Copy Shout init script into place.
+  template:
+    src: shout.init.j2
+    dest: /etc/init.d/shout
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Add Service
+  command: chkconfig --add shout
+
+- name: Ensure Shout is enabled and will start on boot.
+  service:
+    name: shout
+    state: restarted
+    enabled: yes

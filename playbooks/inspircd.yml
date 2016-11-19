@@ -3,13 +3,30 @@
   become: yes
   roles:
       - jladdjr.inspircd
+      - "{{ playbook_dir }}/../roles/shout" 
+  vars_files:
+      - "{{ playbook_dir }}/../vars/irc.yml"
   tasks:
     - name: Enable IRC Ports
       firewalld: 
         port: 6667/tcp
         permanent: true
         state: enabled
+
     - name: Restart firewalld
       service:
         name: firewalld
         state: restarted
+
+    - name: Check if inspircd running
+      shell: ps aux | grep inspircd
+      changed_when: "'bin/inspircd' in cmd.stdout"
+      register: cmd
+
+    - name: Stop inspircd after check
+      command: "{{ inspircd_install_dir }}/run/inspircd stop"
+      when: "'bin/inspircd' in cmd.stdout"
+
+    - name: Start inspircd
+      command: "{{ inspircd_install_dir }}/run/inspircd start"
+

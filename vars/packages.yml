@@ -3,3 +3,5 @@
    - htop
    - apg
    - firewalld
+   - nodejs
+   - npm
