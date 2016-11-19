@@ -4,3 +4,6 @@
 - shout_defaults_host: genos.online
 - shout_defaults_port: 6667
 - shout_port: 80
+- shout_defaults_nick: anonymous
+- shout_defaults_join: "#init"
+
