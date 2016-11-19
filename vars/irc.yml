@@ -2,4 +2,4 @@
 - shout_public: true
 - shout_defaults_name: GenOS
 - shout_defaults_host: genos.online
-
+- shout_port: 80
