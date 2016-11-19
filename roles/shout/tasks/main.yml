@@ -14,11 +14,13 @@
   file:
     path: "{{ shout_home }}"
     state: directory
+  tags: ['config']
 
 - name: Copy Shout config into place.
   template:
     src: config.js.j2
-    dest: /usr/lib/node_modules/shout/defaults/config.js
+    dest: "/usr/lib/node_modules/shout/defaults/config.js" 
+  tags: ['config']
 
 - name: Copy Shout init script into place.
   template:
@@ -27,9 +29,11 @@
     owner: root
     group: root
     mode: 0755
+  tags: ['config']
 
 - name: Add Service
   command: chkconfig --add shout
+  tags: ['config']
 
 - name: Ensure Shout is enabled and will start on boot.
   service:

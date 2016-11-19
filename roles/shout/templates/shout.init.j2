@@ -22,7 +22,7 @@ FOREVER_BIN=/usr/bin/forever
 case "$1" in
   start)
     echo "Starting Shout."
-    $FOREVER_BIN start -a --pidFile $PID $BIN start --home $SHOUT_HOME
+    $FOREVER_BIN start -a --pidFile $PID $BIN start 
     ;;
   stop)
     if [ -f $PID ]; then
@@ -39,7 +39,7 @@ case "$1" in
       kill -TERM $(cat $PID);
       rm -f $PID;
     fi
-    $FOREVER_BIN start -a --pidFile $PID $BIN start --home $SHOUT_HOME
+    $FOREVER_BIN start -a --pidFile $PID $BIN start 
     ;;
   status)
     if [ -f $PID ]; then
