@@ -1,5 +1,6 @@
 ---
 
+
 - name: Install Deps
   yum:
     name: "{{ item }}"
@@ -7,24 +8,29 @@
   with_items:
     - perl
     - net-tools
+  when: 
+  tags: ['teamspeak']
 
 - name: Add Teamspeak User
   user:
     name: "{{ teamspeak_user.name }}"
     password: "{{ teamspeak_user.password }}"
     update_password: always
+  tags: ['teamspeak']
 
 - name: Get the Files
   become_user: "{{ teamspeak_user.name }}"
   get_url:
     url: http://teamspeak.gameserver.gamed.de/ts3/releases/3.0.13.6/teamspeak3-server_linux_amd64-3.0.13.6.tar.bz2
     dest: "/home/{{ teamspeak_user.name }}/"
+  tags: ['teamspeak']
 
 - name: Unpack the Files
   become_user: "{{ teamspeak_user.name }}"
   unarchive: 
     src : "/home/{{ teamspeak_user.name }}/teamspeak3-server_linux_amd64-3.0.13.6.tar.bz2"
     dest: "/home/{{ teamspeak_user.name }}/"
+  tags: ['teamspeak']
 
 - name: Start on Reboot
   become_user: "{{ teamspeak_user.name }}"
@@ -32,6 +38,7 @@
     name: "TS3 Server"
     special_time: reboot
     job: "/home/{{ teamspeak_user.name }}/teamspeak3-server_linux_amd64/ts3server_startscript.sh start"
+  tags: ['teamspeak']
 
 - name: Firewall Settings
   firewalld:
@@ -45,4 +52,5 @@
     - 2010/udp
     - 41144/tcp
     - 2008/tcp
+  tags: ['teamspeak']
 
