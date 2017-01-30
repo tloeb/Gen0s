@@ -64,5 +64,7 @@
         - 22/tcp
         - 80/tcp
         - 443/tcp
+        - 6680/tcp
+      tags: ['firewall-config']
   roles:
     - geerlingguy.repo-epel
